@@ -1150,7 +1150,10 @@ unsigned int ComputeMinWork(unsigned int nBase, int64 nTime)
     return bnResult.GetCompact();
 }
 
-unsigned int static DarkGravityWave2(const CBlockIndex* pindexLast, const CBlockHeader *pblock) {
+/*
+Temporary
+*/
+unsigned int static DarkGravityWave2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, int mod = 0) {
     /* current difficulty formula, darkcoin - DarkGravity v2, written by Evan Duffield - evan@darkcoin.io */
     const CBlockIndex *BlockLastSolved = pindexLast;
     const CBlockIndex *BlockReading = pindexLast;
@@ -1212,7 +1215,10 @@ unsigned int static DarkGravityWave2(const CBlockIndex* pindexLast, const CBlock
             if (fActualTimespan > fTargetTimespan*3)
                 fActualTimespan = fTargetTimespan*3;
 
-            int64 nActualTimespan = fActualTimespan;
+            // TEMPORARY
+            // 32 Bit clients are having a +- 1 value here.
+            // This is a temporary correction.
+            int64 nActualTimespan = fActualTimespan + mod;
             int64 nTargetTimespan = fTargetTimespan;
 
             // Retarget
@@ -2230,7 +2236,12 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
 
         // Check proof of work
         if (nBits != GetNextWorkRequired(pindexPrev, this))
-            return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
+        {
+            // Temporarily Hacky to check +- 1
+            // This is not a permanent solution!
+            if (nBits != DarkGravityWave2(ppindexPrev, this, 1) && nBits != DarkGravityWave2(ppindexPrev, this, -1))
+                return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
+        }
 
         // Check timestamp against prev
         if (GetBlockTime() <= pindexPrev->GetMedianTimePast())
