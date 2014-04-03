@@ -1185,9 +1185,11 @@ void MapPort(bool)
 // Each pair gives a source name and a seed name.
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
+// Official nodes are now maintained by WineVirus/Asura
+// If any issues occur, contact him on IRC
 static const char *strMainNetDNSSeed[][2] = {
-    {"h2oseed2.crypto-knight.org", "h2oseed2.crypto-knight.org"},
-    {"h20seed.crypto-knight.org", "h20seed.crypto-knight.org"},
+    {"node.cryptogeeks.net", "node.cryptogeeks.net"},   // US Node
+    {"node2.cryptogeeks.net", "node2.cryptogeeks.net"}, // EU Node
 	{NULL, NULL}
 };
 
