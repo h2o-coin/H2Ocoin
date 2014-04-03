@@ -2239,7 +2239,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
         {
             // Temporarily Hacky to check +- 1
             // This is not a permanent solution!
-            if (nBits != DarkGravityWave2(ppindexPrev, this, 1) && nBits != DarkGravityWave2(ppindexPrev, this, -1))
+            if (nBits != DarkGravityWave2(pindexPrev, this, 1) && nBits != DarkGravityWave2(pindexPrev, this, -1))
                 return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
         }
 
