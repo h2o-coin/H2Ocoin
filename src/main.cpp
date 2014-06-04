@@ -2307,13 +2307,19 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
         nHeight = pindexPrev->nHeight+1;
 
         // Check proof of work
-        if (nBits != GetNextWorkRequired(pindexPrev, this))
-        {
-            // Temporarily Hacky to check +- 1
+        if(nHeight <= 100000){
+		if (nBits != GetNextWorkRequired(pindexPrev, this))
+		 {
+        	   // Temporarily Hacky to check +- 1
             // This is not a permanent solution!
-            if (nBits != DarkGravityWave2(pindexPrev, this, 1) && nBits != DarkGravityWave2(pindexPrev, this, -1))
+        		  if (nBits != DarkGravityWave2(pindexPrev, this, 1) && nBits != DarkGravityWave2(pindexPrev, this, -1))
                 return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
-        }
+		 }
+
+	} else {
+                if (nBits != GetNextWorkRequired(pindexPrev, this))
+                    return state.DoS(100, error("AcceptBlock() : incorrect proof of work"));
+       }
 
         // Check timestamp against prev
         if (GetBlockTime() <= pindexPrev->GetMedianTimePast())
