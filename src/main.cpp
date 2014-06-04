@@ -1302,7 +1302,7 @@ int DiffMode = 1;
             if (pindexLast->nHeight+1 >= 16) { DiffMode = 2; }
         }
         else {
-            if (pindexLast->nHeight+1 >= 100000) { DiffMode = 2; }
+            if (pindexLast->nHeight+1 >= 98000) { DiffMode = 2; }
            
         }
 
@@ -2307,7 +2307,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
         nHeight = pindexPrev->nHeight+1;
 
         // Check proof of work
-        if(nHeight <= 100000){
+        if(nHeight <= 98000){
 		if (nBits != GetNextWorkRequired(pindexPrev, this))
 		 {
         	   // Temporarily Hacky to check +- 1
