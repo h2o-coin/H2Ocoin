@@ -1188,8 +1188,8 @@ void MapPort(bool)
 // Official nodes are now maintained by WineVirus/Asura
 // If any issues occur, contact him on IRC
 static const char *strMainNetDNSSeed[][2] = {
-    {"node.cryptogeeks.net", "node.cryptogeeks.net"},   // US Node
-    {"node2.cryptogeeks.net", "node2.cryptogeeks.net"}, // EU Node
+    {"h2o.cryptoadhd.com", "h2o.cryptoadhd.com"},   
+    {"node.h2oco.in", "node.h2oco.in"}, 
 	{NULL, NULL}
 };
 
